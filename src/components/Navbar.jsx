@@ -5,14 +5,23 @@ import { VscHome, VscFolderOpened, VscAccount, VscMail } from 'react-icons/vsc';
 function Navbar() {
   // Helper function to handle redirection by updating the URL hash
   const handleRedirect = (id) => {
-    // This will navigate the browser to the section with the matching ID (e.g., #projects)
+    // 1. First, set the URL hash immediately.
     window.location.hash = id;
     
-    // Optional: Add smooth scrolling for a better user experience
-    const targetElement = document.getElementById(id);
-    if (targetElement) {
-      targetElement.scrollIntoView({ behavior: 'smooth' });
-    }
+    // 2. Wrap the scrolling logic in a brief delay. 
+    // This gives the browser a moment to process the hash change 
+    // and correctly find the target element in the DOM, which makes scrolling more reliable.
+    setTimeout(() => {
+      const targetElement = document.getElementById(id);
+      if (targetElement) {
+        // Scroll only if the element is found
+        targetElement.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        // Fallback: If the element isn't immediately found, the hash change 
+        // will still trigger the browser's default jump (or smooth scroll if CSS is set).
+        console.warn(`Target element with ID '${id}' not found.`);
+      }
+    }, 10); // A 10ms delay is usually sufficient
   };
 
   const dockItems = [
@@ -22,14 +31,14 @@ function Navbar() {
       onClick: () => handleRedirect('home') // Directs to #home
     },
     { 
-      icon: <VscFolderOpened size={18} />, // Changed to a folder icon for projects
-      label: 'Projects', 
-      onClick: () => handleRedirect('projects') // Directs to #projects
-    },
-    { 
       icon: <VscAccount size={18} />, // Kept the account/user icon for profile/about
       label: 'About', 
       onClick: () => handleRedirect('about') // Directs to #about
+    },
+    { 
+      icon: <VscFolderOpened size={18} />, // Changed to a folder icon for projects
+      label: 'Projects', 
+      onClick: () => handleRedirect('projects') // Directs to #projects
     },
     { 
       icon: <VscMail size={18} />, // Changed to a mail icon for contact
