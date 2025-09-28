@@ -1,11 +1,15 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+
+
 @custom-variant dark (&:is(.dark *));
 
 html {
   scroll-behavior: smooth;
 }
+
+
 
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -185,4 +189,33 @@ button:focus-visible {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+@layer utilities {
+
+    /* 1. Define the Marquee Keyframes */
+    @keyframes marquee {
+      from {
+        transform: translateX(0%);
+      }
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    /* 2. Define Custom Animation Utility Class */
+    .animate-marquee {
+      animation: marquee 15s linear infinite;
+    }
+
+    /* 3. Define the custom 101% translate classes */
+    .translate-y-101 {
+      --tw-translate-y: 101%;
+      transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+    }
+    .-translate-y-101 {
+      --tw-translate-y: -101%;
+      transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+    }
+
 }

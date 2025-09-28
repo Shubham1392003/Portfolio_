@@ -129,7 +129,7 @@ function Hero() {
   return (
     <section 
       id="home" 
-      className="relative min-h-screen pt-10 bg-gray-950 flex items-center justify-center"
+      className="relative min-h-screen pt-10 bg-black flex items-center justify-center"
     >
       
       {/* PARTICLES BACKGROUND LAYER (z-50) - Fixed for interaction */}
