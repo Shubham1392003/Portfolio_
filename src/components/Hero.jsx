@@ -102,94 +102,89 @@
 // Hero.jsx (Final Code)
 
 // Hero.jsx
-import Particles from './Particles/Particles.jsx';
-import { MapPin, Phone, Mail, Github, Linkedin } from 'lucide-react'; 
-// ⬅️ Import DecryptedText (Assuming the path is correct)
-import DecryptedText from './DecryptedText/DecryptedText.jsx'; 
-
+import ProfileCard from './ProfileCard/ProfileCard.jsx'
+import Particles from './Particles/Particles.jsx'
+import { MapPin, Phone, Mail, Github, Linkedin } from 'lucide-react'
+import DecryptedText from './DecryptedText/DecryptedText.jsx'
 
 function Hero() {
-  // Styles for the Decrypt Effect
-  const encryptedStyle = "text-yellow-400 font-mono";
-  const baseSpeed = 35;
+  // 🔹 Common styles
+  const encryptedStyle = "text-yellow-400 font-mono"
+  const baseSpeed = 35
 
-  // Reusable DecryptBlock component setup (Animates on View)
+  // 🔹 Reusable decrypt block
   const DecryptBlock = ({ text, className = "", ...props }) => (
     <DecryptedText 
       text={text} 
-      animateOn="view" // Animates once when scrolled into view (or when loaded)
-      sequential={true}
+      animateOn="view"
+      sequential
       speed={baseSpeed}
       encryptedClassName={encryptedStyle}
       className={className}
       {...props}
     />
-  );
+  )
 
   return (
     <section 
       id="home" 
       className="relative min-h-screen pt-10 bg-black flex items-center justify-center"
     >
-      
-      {/* PARTICLES BACKGROUND LAYER (z-50) - Fixed for interaction */}
-      <div 
-        className="fixed inset-0 z-50" 
-      >
+      {/* 🔸 Particle Background */}
+      <div className="fixed inset-0 z-50">
         <Particles
           particleColors={['#ffffff', '#ffffff']}
           particleCount={200}
           particleSpread={10}
           speed={0.1}
           particleBaseSize={100}
-          moveParticlesOnHover={true} 
+          moveParticlesOnHover={true}
           alphaParticles={false}
           disableRotation={false}
         />
       </div>
 
-      {/* CONTENT LAYER (z-60) - High Z-index for event priority */}
-      <div className="text-center relative z-60 p-4 max-w-7xl mx-auto sm:px-6 lg:px-8 py-20">
+      {/* 🔸 Main Content */}
+      <div className="relative z-60 text-center p-4 max-w-7xl mx-auto sm:px-6 lg:px-8 py-20">
         
-        {/* Profile Image - Cursor Target */}
-        <div className="mb-8">
-          <img
-            src="/profile.jpg"
-            alt="Shubham Kendre"
-            width={200}
-            height={200}
-            className="cursor-target relative z-[10000] rounded-full mx-auto mb-6 shadow-xl border-4 border-gray-700/50"
+        {/* PROFILE CARD with tilt effect */}
+        <div className="mb-5 flex justify-center">
+          <ProfileCard
+            name="Shubham Kendre"
+            title="Junior Developer"
+            handle="shubham.codes"
+            status="Online"
+            contactText="Contact Me"
+            avatarUrl="/profile1.jpg"
+            showUserInfo={true}
+            enableTilt={true}
+            enableMobileTilt={false}
+            onContactClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
           />
         </div>
 
-        {/* ⬅️ ANIMATED TITLE */}
+        {/* 🔸 Name */}
         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4">
-          <DecryptBlock 
-            text="Shubham Kendre" 
-            className="text-white"
-            parentClassName="inline-block"
-          />
+          <DecryptBlock text="Shubham Kendre" className="text-white" />
         </h1>
-        
-        {/* ⬅️ ANIMATED SUBTITLE */}
+
+        {/* 🔸 Subtitle */}
         <p className="text-xl sm:text-2xl text-gray-400 mb-6">
           <DecryptBlock 
-            text="Junior Developer | AI/ML & Full-Stack Focus" 
+            text="Junior Developer | AI/ML & Full-Stack Focus"
             className="text-gray-400"
-            parentClassName="inline"
           />
         </p>
 
-        {/* ⬅️ ANIMATED SUMMARY */}
+        {/* 🔸 Summary */}
         <p className="text-lg text-gray-500 mb-8 max-w-3xl mx-auto">
           <DecryptBlock 
             text="B.Tech student passionate about Machine Learning, AI, and Full-Stack Development. Building innovative solutions with Python, React.js, and Next.js."
             className="text-gray-500"
-            parentClassName="inline"
           />
         </p>
 
-        {/* Contact Information (Static) */}
+        {/* 🔸 Contact Info */}
         <div className="flex flex-wrap justify-center gap-6 mb-8 text-gray-400">
           <div className="flex items-center gap-2">
             <MapPin className="h-4 w-4" />
@@ -199,17 +194,17 @@ function Hero() {
             <Phone className="h-4 w-4" />
             <span>+91 9028924151</span>
           </div>
-          <div className="flex flex-wrap items-center gap-2">
+          <div className="flex items-center gap-2">
             <Mail className="h-4 w-4" />
             <span>skendre380@gmail.com</span>
           </div>
         </div>
 
-        {/* Social and Action Buttons - Cursor Targets */}
+        {/* 🔸 Social Buttons */}
         <div className="flex flex-wrap justify-center gap-4">
           <a
-            href="https://github.com/Shubham1392003" 
-            target="_blank" 
+            href="https://github.com/Shubham1392003"
+            target="_blank"
             rel="noopener noreferrer"
             className="cursor-target relative z-[10000] px-6 py-3 flex items-center bg-gray-700 text-white rounded-lg shadow-lg hover:bg-gray-600 transition"
           >
@@ -217,8 +212,8 @@ function Hero() {
             GitHub
           </a>
           <a
-            href="https://linkedin.com/in/shubham-kendre-23b605285" 
-            target="_blank" 
+            href="https://linkedin.com/in/shubham-kendre-23b605285"
+            target="_blank"
             rel="noopener noreferrer"
             className="cursor-target relative z-[10000] px-6 py-3 flex items-center border border-gray-600 text-white rounded-lg shadow-lg hover:bg-gray-800 transition"
           >
@@ -235,6 +230,7 @@ function Hero() {
         </div>
       </div>
     </section>
-  );
+  )
 }
-export default Hero;
+
+export default Hero
